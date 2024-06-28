@@ -8,7 +8,7 @@ const checkRestaurantsPromoted = async (value, { req }) => {
     const restaurantsPromoted = await Restaurant.findOne(
       {where: {
         promoted: true,
-        restaurantId: req.body.restaurantId
+        userId: req.user.id
       }
       })
     if(restaurantsPromoted && value) {
