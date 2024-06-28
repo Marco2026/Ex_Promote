@@ -12,11 +12,12 @@ import { AuthorizationContext } from '../../context/AuthorizationContext'
 import { showMessage } from 'react-native-flash-message'
 import DeleteModal from '../../components/DeleteModal'
 import restaurantLogo from '../../../assets/restaurantLogo.jpeg'
+import ConfirmationModal from '../../components/ConfirmationModal'
 
 export default function RestaurantsScreen ({ navigation, route }) {
   const [restaurants, setRestaurants] = useState([])
   const [restaurantToBeDeleted, setRestaurantToBeDeleted] = useState(null)
-  const [restaurantToBePromoted, setRestaurantToBePromoted] = useState(false)
+  const [restaurantToBePromoted, setRestaurantToBePromoted] = useState(null)
   const { loggedInUser } = useContext(AuthorizationContext)
 
   useEffect(() => {
@@ -88,8 +89,9 @@ export default function RestaurantsScreen ({ navigation, route }) {
           </Pressable>
 
           <Pressable
-              onPress={() => promoteRestaurant(item)
-              }
+              onPress={() => {
+                setRestaurantToBePromoted(item)
+              }}
               style={({ pressed }) => [
                 {
                   backgroundColor: pressed
@@ -185,6 +187,7 @@ export default function RestaurantsScreen ({ navigation, route }) {
     try {
       await promote(restaurant.id)
       await fetchRestaurants()
+      setRestaurantToBePromoted(null)
       showMessage({
         message: `Restaurant ${restaurant.name} succesfully promoted`,
         type: 'success',
