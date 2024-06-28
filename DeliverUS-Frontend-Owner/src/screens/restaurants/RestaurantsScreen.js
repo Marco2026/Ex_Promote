@@ -220,6 +220,11 @@ export default function RestaurantsScreen ({ navigation, route }) {
         <TextRegular>The products of this restaurant will be deleted as well</TextRegular>
         <TextRegular>If the restaurant has orders, it cannot be deleted.</TextRegular>
     </DeleteModal>
+    <ConfirmationModal
+      isVisible={restaurantToBePromoted !== null}
+      onCancel={() => setRestaurantToBePromoted(null)}
+      onConfirm={() => promoteRestaurant(restaurantToBePromoted)}>
+    </ConfirmationModal>
     </>
   )
 }
