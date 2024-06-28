@@ -43,7 +43,9 @@ export default function RestaurantsScreen ({ navigation, route }) {
         <View style={[{justifyContent: 'space-between', flexDirection: 'row'}]}>
           <TextSemiBold>Shipping: <TextSemiBold textStyle={{ color: GlobalStyles.brandPrimary }}>{item.shippingCosts.toFixed(2)}€</TextSemiBold></TextSemiBold>
           {item.promoted &&
-            <TextSemiBold textStyle={{ color: GlobalStyles.brandPrimary }}>¡En Promoción!</TextSemiBold>
+            <TextRegular textStyle={[styles.badge, {color: GlobalStyles.brandPrimary, borderColor: GlobalStyles.brandSuccess}]}>
+              ¡En Promoción!
+            </TextRegular>
           }
         </View>
         
@@ -97,7 +99,7 @@ export default function RestaurantsScreen ({ navigation, route }) {
                 styles.actionButton
               ]}>
             <View style={[{ flex: 1, flexDirection: 'row', justifyContent: 'center' }]}>
-              <MaterialCommunityIcons name='alert' color={'white'} size={20}/>
+              <MaterialCommunityIcons name='octagram' color={'white'} size={20}/>
               <TextRegular textStyle={styles.text}>
                 Promote
               </TextRegular>
@@ -260,5 +262,11 @@ const styles = StyleSheet.create({
   emptyList: {
     textAlign: 'center',
     padding: 50
+  },
+  badge: {
+    textAlign: 'center',
+    borderWidth: 2,
+    paddingHorizontal: 10,
+    borderRadius: 10
   }
 })
